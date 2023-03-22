@@ -24,7 +24,11 @@ Cada uno de estos modelos de color tiene sus propias ventajas y desventajas, y s
 
 ## Color blindness
 
+El objetivo de este programa es cargar una imagen y aplicar una corrección de color para simular cómo se vería la imagen para una persona con deuteranopia, esta corrección se realiza mediante una transformación lineal de los valores de color originales de la imagen. La deuteranopia es una forma de daltonismo en la que los receptores de color verde en el ojo son defectuosos, lo que hace que los verdes se perciban como marrones y los rojos y naranjas sean difíciles de distinguir.
+
 ![The CIE 1931 color space chromaticity diagram](https://images.ctfassets.net/u4vv676b8z52/1pog1a6vst4lCobfROxD7m/4174e272b7d1c731533e4537952a2343/enchroma-glasses-678x446-compressor.jpg?fm=jpg&q=80)
+
+Primero se carga la imagen en el canvas para acceder a los valores de los píxeles de la imagen. Luego, se recorre cada conjunto de cuatro valores (uno para cada componente de color: rojo, verde, azul y alfa) y se aplica una corrección de color específica para la deuteranopia utilizando una combinación de los valores de color originales. Por último, los nuevos valores de los píxeles se asignan de vuelta a la imagen  y se muestra la imagen modificada en el canvas.
 
 {{< p5-iframe sketch="/showcase/sketches/colorblind.js" width="728" height="379" >}}
 
@@ -34,3 +38,4 @@ Cada uno de estos modelos de color tiene sus propias ventajas y desventajas, y s
 {{< /highlight >}}
 {{< /details >}}
 
+En resumen, el programa muestra cómo se puede ajustar el color de una imagen para hacerla más accesible para personas con deuteranopía y, en general, para mejorar la percepción del color para aquellos que tienen dificultades para distinguir ciertos tonos.

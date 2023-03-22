@@ -44,11 +44,17 @@ El patrón de moiré es un fenómeno visual que ocurre cuando dos patrones con u
 
 ## Dithering
 
+Dithering es una técnica utilizada en computación visual para simular colores o tonos de color que no están disponibles en una paleta limitada. Esto se logra mezclando píxeles de colores diferentes en patrones cuidadosamente diseñados para crear la ilusión de un color o tono de color más suave. El dithering se utiliza comúnmente en imágenes con una paleta limitada, como gráficos de computadora antiguos o imágenes GIF animadas, para mejorar la calidad visual de la imagen y reducir la apariencia de bandas de color.
+
 {{< p5-iframe sketch="/showcase/sketches/dithering.js" width="400" height="400" >}}
 
-![The CIE 1931 color space chromaticity diagram](https://cms.modumb.com/storage/magazine/_800x422/guia-practica-para-identificar-el-rostro-de-un-cliente-8282.jpg)
+El ruido de Perlin es un patrón de ruido pseudoaleatorio que se utiliza a menudo en gráficos por computadora y animación para crear texturas y efectos visuales realistas.
+El programa utiliza el ruido Perlin para generar un patrón entremezclado en blanco y negro en el lienzo en función de las coordenadas x e y del píxel. El resultado es una animación fluida y abstracta que cambia continuamente a medida que se actualiza el valor de ruido para cada píxel en el lienzo.
 
-{{< details title="terreno" open=false >}}
+![Imagen de prueba para distintos tipos de "Dithering"](https://cms.modumb.com/storage/magazine/_800x422/guia-practica-para-identificar-el-rostro-de-un-cliente-8282.jpg)
+Figura: Imagen de prueba para distintos tipos de "Dithering"
+
+{{< details title="Ruido de Perlin" open=false >}}
 {{< highlight html >}}
 {{</* p5-iframe sketch="/showcase/sketches/dithering.js" width="400" height="400 */>}}
 {{< /highlight >}}
@@ -56,7 +62,9 @@ El patrón de moiré es un fenómeno visual que ocurre cuando dos patrones con u
 
 {{< p5-iframe sketch="/showcase/sketches/dithering2.js" width="800" height="422" >}}
 
-{{< details title="terreno" open=false >}}
+El programa  genera una imagen de ruido de Perlin en escala de grises en el lienzo de dibujo, para eso se utilizan diferentes frecuencias y amplitudes para los valores de x e y para producir un patrón de ruido complejo. Luego, utiliza los valores de ruido para generar valores de color gris para cada píxel en el lienzo de dibujo y, finalmente, actualiza los píxeles del lienzo con los nuevos valores de color para mostrar la imagen de ruido de Perlin. En resumen, el programa tiene como objetivo demostrar cómo se puede utilizar la biblioteca p5.js para generar y visualizar patrones de ruido en el navegador.
+
+{{< details title="Algoritmo de dithering de Floyd-Steinberg" open=false >}}
 {{< highlight html >}}
 {{</* p5-iframe sketch="/showcase/sketches/dithering2.js" width="800" height="422 */>}}
 {{< /highlight >}}
@@ -67,5 +75,17 @@ El patrón de moiré es un fenómeno visual que ocurre cuando dos patrones con u
 {{< details title="dithering" open=false >}}
 {{< highlight html >}}
 {{</* p5-iframe sketch="/showcase/sketches/dithering3.js" width="800" height="422 */>}}
+{{< /highlight >}}
+{{< /details >}}
+
+El algoritmo de dithering de Floyd-Steinberg se utiliza para reducir la cantidad de colores en una imagen, mientras se mantiene la apariencia visual de la imagen original. En este caso, el algoritmo reduce los colores de la imagen a un espacio de color de 2 bits y aplica la difusión de error de Floyd-Steinberg para lograr una apariencia visualmente similar a la imagen original con menos colores. El resultado final se muestra en el canvas.
+
+## Pixelator
+
+{{< p5-iframe sketch="/showcase/sketches/pixelator.js" width="800" height="422" >}}
+
+{{< details title="pixelator" open=false >}}
+{{< highlight html >}}
+{{</* p5-iframe sketch="/showcase/sketches/pixelator.js" width="800" height="422 */>}}
 {{< /highlight >}}
 {{< /details >}}
