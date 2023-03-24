@@ -1,3 +1,7 @@
+---
+weight: 1
+---
+
 # Coloring
 
 Existen otros modelos de color que se utilizan en las industrias de diseño gráfico, impresión y fotografía. A continuación, se presentan breves descripciones de algunos de estos modelos de color:

@@ -1,3 +1,7 @@
+---
+weight: 3
+---
+
 ## Masking
 
 # Kinegrama
@@ -79,13 +83,3 @@ El programa  genera una imagen de ruido de Perlin en escala de grises en el lien
 {{< /details >}}
 
 El algoritmo de dithering de Floyd-Steinberg se utiliza para reducir la cantidad de colores en una imagen, mientras se mantiene la apariencia visual de la imagen original. En este caso, el algoritmo reduce los colores de la imagen a un espacio de color de 2 bits y aplica la difusión de error de Floyd-Steinberg para lograr una apariencia visualmente similar a la imagen original con menos colores. El resultado final se muestra en el canvas.
-
-## Pixelator
-
-{{< p5-iframe sketch="/showcase/sketches/pixelator.js" width="800" height="422" >}}
-
-{{< details title="pixelator" open=false >}}
-{{< highlight html >}}
-{{</* p5-iframe sketch="/showcase/sketches/pixelator.js" width="800" height="422 */>}}
-{{< /highlight >}}
-{{< /details >}}

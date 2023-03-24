@@ -1,4 +1,10 @@
-# Aplicacion de Visualizacion de Terreno
+---
+weight: 2
+---
+
+# Mach Bands
+
+## Aplicacion de Visualizacion de Terreno
 
 El objetivo de este programa es generar una visualización en tiempo real de un terreno tridimensional generado aleatoriamente utilizando el ruido Perlin, aquí se puede observar una cuadrícula de triángulos que se ajustan a la forma del terreno, y utiliza diferentes colores para representar diferentes alturas en el terreno. La visualización se actualiza continuamente, creando la ilusión de un efecto de movimiento y transformación en el terreno. Este programa puede utilizarse para crear escenas 3D para juegos, simulaciones, visualizaciones de datos y muchas otras aplicaciones. También es una herramienta útil para explorar la naturaleza del ruido Perlin y su capacidad para crear patrones complejos y orgánicos. El programa utiliza la técnica de dibujo de triángulo strip para crear la malla de triángulos que conforman el terreno. Esta técnica reduce el número de vértices necesarios para representar la malla, lo que permite una representación más eficiente y rápida del terreno.
 
