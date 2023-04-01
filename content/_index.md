@@ -45,7 +45,11 @@ En el curso aspiro a lograr adquirir un buen conocimiento en cuanto a la manipul
 Ingenieria de Sistemas y computación.
 
 #### Motivaciones:
+Me motiva estudiar ingenieria de sistemas debido a que tiene muchas aplicaciones prácticas en áreas como la medicina, la seguridad, la industria cinematográfica, el diseño gráfico, la realidad virtual, entre otras.
 
 #### Aspiraciones:
+Estoy interesado en aprender sobre el diseño visual que se puede crear utilizando código y como puedo emplearlo para comunicar mis ideas más efectivamente
+"una imagen vale más que mil palabras"
+
 {{< /hint >}}
 
