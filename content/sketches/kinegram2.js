@@ -4,7 +4,7 @@ let scaleFactor = 1;
 let translation = 0;
 
 function preload() {
-  img = loadImage('https://picsum.photos/200');
+  img = loadImage('https://cn.i.cdn.ti-platform.com/content/343/showpage/historias-corrientes/es/regularshow-200x200.png');
 }
 
 function setup() {
