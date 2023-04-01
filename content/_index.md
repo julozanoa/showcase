@@ -3,14 +3,6 @@ title: Computación Visual
 type: docs
 ---
 
-<style>
-body {
-  background-image: url('https://media.istockphoto.com/id/952039286/es/foto/fondo-abstracto-escenario.jpg?b=1&s=612x612&w=0&k=20&c=S503OhEyvVPitbOIA2PKmSPF9doB-mnM6R617FMU_jQ=');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-</style>
-
 # Computación Visual 2023-1
 
 El objetivo del curso es brindar una introducción a los conceptos básicos de la computación gráfica y el procesamiento de imágenes, tomando como eje central el estudio del pipeline gráfico presente en diferentes plataformas modernas, que tienen en común la existencia de hardware dedicado para el procesamiento gráfico.
