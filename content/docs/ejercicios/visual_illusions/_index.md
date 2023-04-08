@@ -27,9 +27,9 @@ Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat
 #### Color Models
 {{< /hint >}}
 
-Para color models: Introducción a los modelos de color en general: Este artículo de [Smashing Magazine](https://www.smashingmagazine.com/2018/01/understanding-using-color-theory/) es una buena introducción a los diferentes modelos de color, incluyendo RGB, HSL, HSB y otros. Explica cómo funcionan cada uno y cuáles son sus ventajas y desventajas.
+[Colormaping](https://stackoverflow.com/questions/75777655/colormapping-with-hsb-with-faulty-output-in-p5-js): Este es un post de Stack Overflow donde alguien pregunta cómo hacer un efecto de clormaping con el modelo de color HSB en p5.js, y recibe una respuesta con un código corregido y una explicación.
 
-Documentación de [p5.js](https://p5js.org/es/reference/#group-Color) sobre HSL y HSB: La documentación oficial de [p5.js](https://p5js.org/es/reference/#group-Color)s incluye información detallada sobre cómo trabajar con los modelos de color HSL (hue, saturation, lightness) y HSB (hue, saturation, brightness), que son alternativas al modelo RGB. Incluye ejemplos y código para que puedas seguirlos. 
+[Modelos de color](https://aprenderuxui.com/modelos-de-color-hsl-y-hsb/aprender/uidesign/): Este es un artículo de un blog sobre diseño de interfaces de usuario, donde se describe cómo funcionan los modelos de color HSL y HSB, cómo se diferencian del modelo RGB, y cómo se pueden usar en herramientas como p5.js para crear efectos visuales interesantes.
 
 Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat).
 
@@ -40,7 +40,7 @@ Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat
 {{< /hint >}}
 
 {{< hint danger >}}
-#### **Mach Bands**
+#### **Terrain with Perlin Noise **
 {{< /hint >}}
 
 Documentación de Perlin Noise en la página web de [Processing](https://processing.org/reference/noise_.html).
@@ -62,7 +62,7 @@ Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat
 #### **Kinegramas**
 {{< /hint >}}
 
-[Tutorial](https://www.instructables.com/Kinegrams-How-to-Create-Them/) sobre kinegramas: Este tutorial de Instructables explica cómo crear un kinegrama usando un software de edición de imágenes como Photoshop o GIMP. Incluye imágenes y un video para que puedas seguir los pasos.
+[Kinegram:](https://www.nature.com/articles/s41598-020-70427-x) Este es un artículo científico donde se describe un fenómeno óptico de patrones de moiré estáticos en rejillas o gratings en movimiento. Se explica la teoría y la simulación por computadora del efecto, y se sugiere su posible uso en aplicaciones de seguridad.
 
 Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat).
 
@@ -70,7 +70,7 @@ Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat
 #### **Patrones de Moiré**
 {{< /hint >}}
 
-[Tutorial](https://www.creativebloq.com/inspiration/understand-and-create-moire-patterns-12121420) sobre patrones de moiré: Este tutorial de Creative Bloq explica qué son los patrones de moiré y cómo crearlos utilizando diferentes técnicas, como la superposición de patrones o la rotación de líneas. Incluye ejemplos y consejos prácticos.
+Este es otro [artículo científico](https://www.nature.com/articles/s41699-022-00321-9) donde se investiga una heteroestructura de MoTe 2 /grafeno crecida por epitaxia de haces moleculares. Se utiliza la microscopía de efecto túnel (STM) y la teoría del funcional de la densidad (DFT) para estudiar los patrones de moiré de alto índice que aparecen en la interfaz entre las capas, y se revelan las características electrónicas complejas de la heteroestructura.
 
 Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat).
 
@@ -83,7 +83,7 @@ Ejemplos de "dithering" en p5.js: En OpenProcessing, una plataforma para compart
 [Dither](https://www.openprocessing.org/sketch/888296) de Dan McKeown <br>
 [Halftone](https://www.openprocessing.org/sketch/591904) de Felix Turner <br>
 
-Tutorial de "dithering" con [p5.js](https://p5js.org/examples/color-halftone.html): Este tutorial de Joshua Noble en el sitio web de [p5.js](https://p5js.org/examples/color-halftone.html) explica cómo implementar diferentes técnicas de "dithering" en [p5.js](https://p5js.org/examples/color-halftone.html), como "ordered dithering" y "error diffusion". Incluye ejemplos y código para que puedas seguirlos.
+[Dither:](https://ditherit.com/) Esta es una aplicación web para difuminar imágenes usando diferentes algoritmos y paletas de colores. Puedes subir tus propias imágenes o usar algunas de ejemplo, y ver el resultado en tiempo real. También puedes descargar las imágenes difuminadas o compartirlas en redes sociales.
 
 Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat).
 
@@ -115,9 +115,14 @@ Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat
 #### **2D a 3D**
 {{< /hint >}}
 
-Tutorial sobre el uso de perspectiva en [p5.js](https://p5js.org/es/examples/3d-perspective.html): En este tutorial de la documentación oficial de [p5.js](https://p5js.org/es/examples/3d-perspective.html), se explica cómo utilizar la perspectiva para crear la ilusión de profundidad en una imagen en 2D. Incluye ejemplos y código para que puedas seguirlos.
-
-Ejemplo de una escena 3D en p5: Este sketch de [p5.js](https://www.openprocessing.org/sketch/179265) creado por la comunidad de OpenProcessing muestra cómo crear una escena en 3D utilizando la biblioteca [p5.js](https://www.openprocessing.org/sketch/179265). Puedes estudiar el código y adaptarlo a tu proyecto de pistas monoculares.
-
+[3D:](https://astra-vision.github.io/MonoScene/) Este es un artículo que te explica qué son las pistas monoculares y cómo cada uno de tus ojos capta información visual que se usa para juzgar la distancia, la profundidad y el espacio tridimensional. También te muestra algunos ejemplos de pistas monoculares como el tamaño relativo, la perspectiva lineal, la superposición y el gradiente de textura.
 
 Herramienta de procesamiento de lenguaje [chat gpt](https://chat.openai.com/chat).
+
+<br>
+
+{{< hint warning>}}
+## **VIDEO EXPLICATIVO**
+{{< /hint >}}
+
+[Video Explicativo](https://drive.google.com/file/d/1DTufR9WVNuQwllYp3L1oHg90ZKgbTNuy/view?usp=share_link)
