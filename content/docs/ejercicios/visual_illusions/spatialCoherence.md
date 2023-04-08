@@ -24,9 +24,48 @@ La pixelación ha sido utilizada durante décadas en la industria de los videoju
 
 La aplicación utiliza dos estrategias para pixelar la imagen en vivo. La primera estrategia es la media de color, donde cada pixel se calcula como el promedio de los colores que cubren cada mosaico de la imagen original. La segunda estrategia es la coherencia espacial, donde cada pixel se toma de un solo color arbitrario encontrado en cada mosaico de la imagen original. El código utiliza la biblioteca p5.js para cargar la imagen de la cámara del usuario, pixelarla y mostrarla en la pantalla.
 
-{{< details title="pixelator" open=false >}}
-{{< highlight html >}}
-{{</* p5-iframe sketch="/showcase/sketches/pixelator.js" width="800" height="422 */>}}
+{{< details title="Pixelator" open=false >}} 
+{{< highlight md >}}
+{{</* p5-instance-div id="Pixelator" />}}
+    let video;
+    let pixelSize = 20;
+
+    function setup() {
+        createCanvas(640, 480);
+        video = createCapture(VIDEO);
+        video.size(width/pixelSize, height/pixelSize);
+        video.hide();
+    }
+
+    function draw() {
+        background(0);
+        video.loadPixels();
+        for (let y = 0; y < video.height; y++) {
+            for (let x = 0; x < video.width; x++) {
+                let index = (x + y * video.width) * 4;
+                let r = video.pixels[index + 0];
+                let g = video.pixels[index + 1];
+                let b = video.pixels[index + 2];
+                fill(r, g, b);
+                noStroke();
+                rect(x*pixelSize, y*pixelSize, pixelSize, pixelSize);
+            }
+        }
+    }
+
+    function keyPressed() {
+        if (key == '+') {
+            pixelSize += 5;
+            video.size(width/pixelSize, height/pixelSize);
+        } else if (key == '-') {
+            pixelSize -= 5;
+            if (pixelSize < 5) {
+                pixelSize = 5;
+            }
+            video.size(width/pixelSize, height/pixelSize);
+        }
+    }
+{{< /p5-instance-div */>}}
 {{< /highlight >}}
 {{< /details >}}
 

@@ -2,7 +2,9 @@
 weight: 6
 ---
 
-# Depth Perception
+# **Depth Perception**
+
+## **2D a 3D**
 
 {{< hint info >}}
 ### Introducción
@@ -22,9 +24,66 @@ Históricamente, la perspectiva lineal fue desarrollada en el Renacimiento y uti
 
 El código adjunto es un ejemplo de cómo se puede utilizar la biblioteca p5.js para crear objetos 3D en un canvas. La función setup() define el tamaño del canvas y la función draw() dibuja diferentes formas geométricas y las anima rotándolas. Este ejemplo es una demostración de cómo se pueden utilizar diferentes claves para crear una ilusión de profundidad en una escena 3D.
 
-{{< details title="3D" open=false >}}
-{{< highlight html >}}
-{{</* p5-iframe sketch="/showcase/sketches/3d.js" width="710" height="400 */>}}
+{{< details title="3d" open=false >}} 
+{{< highlight md >}}
+{{</* p5-instance-div id="3d" />}}
+    function setup() {
+        createCanvas(710, 400, WEBGL);
+    }
+
+    function draw() {
+        background(250);
+
+        translate(-240, -100, 0);
+        normalMaterial();
+        push();
+        rotateZ(frameCount * 0.01);
+        rotateX(frameCount * 0.01);
+        rotateY(frameCount * 0.01);
+        plane(70);
+        pop();
+
+        translate(240, 0, 0);
+        push();
+        rotateZ(frameCount * 0.01);
+        rotateX(frameCount * 0.01);
+        rotateY(frameCount * 0.01);
+        box(70, 70, 70);
+        pop();
+
+        translate(240, 0, 0);
+        push();
+        rotateZ(frameCount * 0.01);
+        rotateX(frameCount * 0.01);
+        rotateY(frameCount * 0.01);
+        cylinder(70, 70);
+        pop();
+
+        translate(-240 * 2, 200, 0);
+        push();
+        rotateZ(frameCount * 0.01);
+        rotateX(frameCount * 0.01);
+        rotateY(frameCount * 0.01);
+        cone(70, 70);
+        pop();
+
+        translate(240, 0, 0);
+        push();
+        rotateZ(frameCount * 0.01);
+        rotateX(frameCount * 0.01);
+        rotateY(frameCount * 0.01);
+        torus(70, 20);
+        pop();
+
+        translate(240, 0, 0);
+        push();
+        rotateZ(frameCount * 0.01);
+        rotateX(frameCount * 0.01);
+        rotateY(frameCount * 0.01);
+        sphere(70);
+        pop();
+    }
+{{< /p5-instance-div */>}}
 {{< /highlight >}}
 {{< /details >}}
 
