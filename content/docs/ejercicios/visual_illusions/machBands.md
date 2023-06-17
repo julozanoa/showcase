@@ -107,9 +107,9 @@ El objetivo de este programa es generar una visualización en tiempo real de un 
 
 {{< p5-iframe sketch="/showcase/sketches/terreno.js" width="600" height="400" >}}
 
-{{< details title="Terrain with Perlin Noise" open=false >}} 
+{{< details title="Terrain with Perlin Noise2" open=false >}} 
 {{< highlight md >}}
-{{</* p5-instance-div id="Terrain with Perlin Noise" />}}
+{{</* p5-instance-div id="Terrain with Perlin Noise2" />}}
     let cols, rows;
     let scl = 20;
     let w = 600;

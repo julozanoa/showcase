@@ -2,121 +2,170 @@
 weight: 1
 ---
 
-# **Coloring**
+## Fotomosaico
 
-{{< hint info >}}
-### Introducción
-{{< /hint >}}
+El fotomosaico es una imagen, retrato o fotografía que se divide por figuras geométricas, generalmente
+por cuadrados o rectángulos del mismo tamaño, esto con el fin de remplazar las mismas
+por otros retratos, fotografías o imágenes que concuerden con los colores promedio que encierran las
+figuras geométricas de la imagen original, logrando que al visualizar la
+imagen de un punto lejano se logre ver como la original , pero que al ver de un punto cercano o al
+hacer zoom se pueda percibir que se compone de otras imágenes.
 
-El uso de shaders en el desarrollo de gráficos y aplicaciones visuales ha permitido alcanzar niveles de realismo y efectos visuales impresionantes. Los shaders son programas que se ejecutan en la unidad de procesamiento gráfico (GPU) y son responsables de generar la salida visual en pantalla mediante cálculos complejos de sombreado, iluminación y efectos post-procesamiento en tiempo real. En este ejercicio, se busca implementar nuevos modos de blending utilizando shaders en el contexto de la biblioteca p5.js. Estos modos de blending permitirán combinar y mezclar colores de forma creativa, abriendo un mundo de posibilidades para la creación de efectos visuales y el procesamiento de imágenes.
+# Fotomosaico
 
-{{< hint info >}}
-### Antecedentes y Trabajos Previos
-{{< /hint >}}
+## Fotomosaico por hardware
 
-El uso de shaders para implementar modos de blending no es nuevo en el campo de los gráficos por computadora. Los modos de blending tradicionales como "Multiply" y "Screen" han sido ampliamente utilizados en aplicaciones de edición de imágenes, animación y renderizado 3D. También existen numerosos trabajos y bibliotecas que han explorado la implementación de nuevos modos de blending y efectos visuales utilizando shaders. Estos trabajos previos han sentado las bases para el desarrollo de técnicas más avanzadas de blending y han demostrado el potencial creativo y expresivo de los shaders en el ámbito visual.
+La implementación del fotomosaico se puede realizar a través de hardware, es decir, la construcción de un algoritmo que se encargue de convertir la imagen original en un mosaico de otras.
 
-{{< hint info >}}
-### Solución
-{{< /hint >}}
+En la funcion `preload` definimos el fragmento a usar demoninado `photomosaic.frag`, a partir de ahi al mosaico final vamos a definir ciertos parametros que van a ser obtenidos al momento de recorrer la imagen, aqui se comparan los texeles del color promedio que posee cada pixel de la imagen o video original.
 
-{{< details title="sketch" open=false >}}
-{{< highlight md >}}
-{{</* p5-instance-div id="sketch" />}}
-    let shader;
-    let img1;
-    let img2;
+Los colores promedio de la imagen original son comparados con la imagen devuelta por el quadrille, haciendo uso de una tolerancia que va aumentando hasta encontrar el color mas cercano al del original y de esta forma ese color encontrado es el que se usa para llenar en la imagen que se muestra como resultado.
 
-    // Código del shader vertex
-    const vertShader = `
-        precision highp float;
+{{< details title="photomosaic.js" open=false >}}
 
-        // Default vertex shader
-        attribute vec3 aPosition;
-        attribute vec2 aTexCoord;
-        uniform mat4 uModelViewMatrix;
-        uniform mat4 uProjectionMatrix;
-        varying vec2 vTexCoord;
+```javascript
 
-        void main() {
-        gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aPosition, 1.0);
-        vTexCoord = aTexCoord;
-        }
-    `;
+```
 
-    // Código del shader fragment
-    const fragShader = `
-    precision highp float;
-
-    uniform sampler2D texture1;
-    uniform sampler2D texture2;
-    uniform int blendMode; // Blending mode selector
-    varying vec2 vTexCoord;
-
-    void main() {
-    vec4 color1 = texture2D(texture1, vTexCoord);
-    vec4 color2 = texture2D(texture2, vTexCoord);
-
-    vec4 blendedColor;
-
-    if (blendMode == 1) {
-        // Blending mode 1: Multiply
-        blendedColor = color1 * color2;
-    } else if (blendMode == 2) {
-        // Blending mode 2: Screen
-        blendedColor = vec4(1.0) - ((vec4(1.0) - color1) * (vec4(1.0) - color2));
-    }
-    // Add more blending modes as needed
-
-    gl_FragColor = blendedColor;
-    }
-    `;
-
-    function preload() {
-    img1 = loadImage('img1.jpg');
-    img2 = loadImage('img2.jpg');
-    }
-
-    function setup() {
-    createCanvas(800, 600, WEBGL);
-    
-    shader = createShader(vertShader, fragShader);
-    shader.setUniform('tex0', img1);
-    shader.setUniform('tex1', img2);
-    shader.shader(this.shader);
-    }
-
-    function draw() {
-    shader.setUniform('time', millis() / 1000.0);
-    shader.setUniform('resolution', [width, height]);
-    shader.setUniform('mouse', [mouseX, mouseY]);
-    
-    shader(shader);
-    rect(0, 0, width, height);
-    }
-
-{{< /p5-instance-div */>}}
-{{< /highlight >}}
 {{< /details >}}
 
-{{< p5-iframe sketch="/showcase/sketches/sketch.js" width="800" height="600" >}}
+{{< details title="photomosaic.frag" open=false >}}
 
-En resumen, el código utiliza p5.js y shaders para aplicar diferentes modos de blending a dos imágenes cargadas.
+```javascript
+precision mediump float;
 
-{{< hint info >}}
-### Conclusión
+const int num_images = 40;
+
+// source (image or video) is sent by the sketch
+uniform sampler2D source;
+
+// palette is sent by the sketch
+uniform sampler2D palette;
+// number of cols are sent by sketch
+uniform float cols;
+
+uniform float lumas[num_images];
+uniform float red_palette[num_images];
+uniform float green_palette[num_images];
+uniform float blue_palette[num_images];
+
+// toggles debug
+uniform bool debug;
+
+// toggles coloring
+uniform bool color_on;
+uniform vec4 background;
+uniform vec4 foreground;
+
+// target horizontal & vertical resolution
+uniform float resolution;
+
+// interpolated color (same name and type as in vertex shader)
+varying vec4 vVertexColor;
+// interpolated texcoord (same name and type as in vertex shader)
+varying vec2 vTexCoord;
+
+float luma(vec3 color) {
+  return (0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
+}
+
+void main() {
+  vec2 fontCoord = vTexCoord * resolution;
+  vec2 srcCoord = floor(fontCoord);
+  fontCoord = fontCoord - srcCoord;
+  srcCoord = srcCoord / vec2(resolution);
+  float mid = 1.0/(2.0*resolution);
+  srcCoord = srcCoord + vec2(mid);
+
+  vec4 key = texture2D(source, srcCoord);
+  if (debug) {
+    gl_FragColor = key;
+  } else {
+    float lumakey = luma(key.rgb);
+    float selected = 0.0;
+
+    bool complete = false;
+    for(float j = 0.02; j <= 0.5; j += 0.02){
+      for(int i = 0 ; i < num_images; i ++)
+      {
+        if((red_palette[i]/255.0> (key.r - j) && red_palette[i]/255.0 < (key.r + j)) && (green_palette[i]/255.0> (key.g - j) && green_palette[i]/255.0 < (key.g + j)) && (blue_palette[i]/255.0> (key.b - j) && blue_palette[i]/255.0 < (key.b + j))){
+          selected = float(i);
+          complete = true;
+          break;
+        }
+      }
+      if(complete){
+        break;
+      }
+    }
+
+    vec2 tile = vec2((floor(selected) + fontCoord.x) / cols, fontCoord.y);
+
+    vec4 paletteTexel = texture2D(palette, tile);
+    gl_FragColor = paletteTexel;
+  }
+}
+
+```
+
+{{< /details >}}
+
+{{< details title="photomosaic.js" open=false >}}
+
+```javascript
+function preload() {
+  image_src = loadImage('/visual_computing/imgs/car.jpg');
+  video_src = createVideo(['/visual_computing/vid/drift.mp4']);
+  video_src.hide(); // by default video shows up in separate dom
+  mosaic = readShader('/visual_computing/sketches/shaders/photomosaic.frag');
+  p = [];
+  for (let i = 1; i <= 40; i++) {
+    if (i.toString().length == 1) {
+      p.push(loadImage(`/visual_computing/imgs/cars/00000${i}.jpg`));
+    } else {
+      p.push(loadImage(`/visual_computing/imgs/cars/0000${i}.jpg`));
+    }
+  }
+}
+
+function sample() {
+  if (pg.width !== SAMPLE_RES * imageCells.width) {
+    pg = createGraphics(SAMPLE_RES * imageCells.width, SAMPLE_RES);
+    mosaic.setUniform("cols", imageCells.width);
+  }
+  imageCells.sort({
+    ascending: true,
+    cellLength: SAMPLE_RES,
+    mode: "LUMA",
+  });
+
+  luma = imageCells.saveLuma({
+    cellLength: SAMPLE_RES,
+  });
+  rgb = imageCells.saveRGB({
+    cellLength: SAMPLE_RES,
+  });
+  drawQuadrille(imageCells, {
+    graphics: pg,
+    cellLength: SAMPLE_RES,
+    outlineWeight: 0,
+  });
+  mosaic.setUniform("palette", pg);
+  mosaic.setUniform("lumas", luma);
+  mosaic.setUniform("red_palette", rgb.r);
+  mosaic.setUniform("green_palette", rgb.g);
+  mosaic.setUniform("blue_palette", rgb.b);
+}
+```
+
+{{< /details >}}
+
+{{< p5-iframe sketch="/showcase/sketches/photomosaic.js" lib1="/showcase/sketches/libraries/p5.shaderbox.js" lib2="/showcase/sketches/libraries/p5.quadrille.js"width="675" height="675" >}}
+
+# Referencias
+
+{{< hint warning >}}
+
+- [1] _“Shaders”_ **github.com** https://github.com/mattdesl/lwjgl-basics/wiki/Shaders (Mar. 8, 2020).
+
 {{< /hint >}}
-
-En este ejercicio, se ha logrado implementar nuevos modos de blending utilizando shaders en p5.js. Los modos de blending "Multiply" y "Screen" ofrecen formas interesantes de combinar y mezclar colores, permitiendo la creación de efectos visuales impactantes. La utilización de shaders en p5.js ha demostrado ser una herramienta poderosa para la manipulación de gráficos y el procesamiento de imágenes en tiempo real. Este ejercicio ha sentado las bases para futuras exploraciones y experimentaciones con nuevos modos de blending y efectos visuales en el contexto de p5.js y otras bibliotecas similares.
-
-{{< hint info >}}
-### Trabajos Futuros
-{{< /hint >}}
-
-A partir de este ejercicio, existen diversas direcciones para futuros trabajos y exploraciones en el ámbito de los shaders y los modos de blending en p5.js. Algunas posibles áreas de desarrollo incluyen:
-
-Implementación de modos de blending adicionales: Se puede investigar y desarrollar nuevos modos de blending que ofrezcan resultados visuales únicos y sorprendentes. Estos modos de blending podrían inspirarse en técnicas utilizadas en aplicaciones de edición de imágenes o en el campo del renderizado de gráficos por computadora.
-
-Optimización y rendimiento: Es posible realizar mejoras en el rendimiento de los shaders implementados, optimizando el código y aprovechando al máximo las capacidades de la GPU. Esto permitirá aplicar los modos de blending a imágenes y animaciones de mayor tamaño y complejidad sin comprometer la fluidez y la interactividad.
-
-Integración con otras bibliotecas y tecnologías: Se puede explorar la integración de los shaders de p5.js con otras bibliotecas y tecnologías relacionadas, como bibliotecas de detección de movimiento o realidad virtual. Esto abrirá nuevas posibilidades para la creación de experiencias interactivas y envolventes.
