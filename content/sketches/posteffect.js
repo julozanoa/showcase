@@ -2,96 +2,90 @@ let img;
 let shader;
 
 function preload() {
-  // Carga la imagen
-  img = loadImage('/showcase/imgs/paisaje.jpg');
-  
-  // Carga el fragment shader
-  shader = loadShader('zoom.vert', 'zoom.frag');
+  // Carga la imagen y los shaders
+  img = loadImage("/showcase/imgs/paisaje.jpg");
+ 
 }
 
 function setup() {
-  createCanvas(800, 600, WEBGL);
-  
-let img;
-let shader;
+  createCanvas(800, 600);
 
-function preload() {
-  // Carga la imagen
-  img = loadImage('/showcase/imgs/paisaje.jpg');
+  // Crea las casillas de verificación
+  checkboxBlur = createCheckbox('Blur', false);
+  checkboxBlur.position(10, 10);
+  checkboxBlur.changed(applyFilters);
+
+  checkboxGray = createCheckbox('Gray', false);
+  checkboxGray.position(10, 30);
+  checkboxGray.changed(applyFilters);
+
+  checkboxInvert = createCheckbox('Invert', false);
+  checkboxInvert.position(10, 50);
+  checkboxInvert.changed(applyFilters);
+
+  applyFilters(); // Aplica los filtros iniciales
 }
 
-function setup() {
-  createCanvas(800, 600, WEBGL);
-  
-  // Crea el shader utilizando los fragment shaders integrados
-  shader = createShader(vertShader, fragShader);
-  shader.setUniform('texture', img);
-  shader.setUniform('resolution', [width, height]);
+function applyFilters() {
+  background(220);
+  image(img, 0, 0, width, height); // Dibuja la imagen original en el lienzo
+
+  // Verifica las casillas seleccionadas y aplica los filtros correspondientes
+  if (checkboxBlur.checked()) {
+    filter(BLUR);
+  }
+
+  if (checkboxGray.checked()) {
+    filter(GRAY);
+  }
+
+  if (checkboxInvert.checked()) {
+    filter(INVERT);
+  }
 }
 
 function draw() {
-  // Dibuja la imagen en el lienzo utilizando el shader
-  shader(shader);
-  rect(-width / 2, -height / 2, width, height);
+  
 }
 
-// Fragment shader
-const fragShader = `
-precision mediump float;
+/*
+let img;
+let shaderBlur, shaderGray, shaderInvert;
 
-uniform sampler2D texture;
-uniform vec2 resolution;
-
-void main() {
-  vec2 uv = gl_FragCoord.xy / resolution.xy;
-  
-  // Calcula las coordenadas de textura para el zoom
-  vec2 zoomCenter = vec2(0.5, 0.5);  // Punto central del zoom (0.5, 0.5 es el centro del lienzo)
-  float zoomAmount = 2.0;  // Factor de zoom (2.0 duplica el tamaño)
-  vec2 zoomUV = (uv - zoomCenter) / zoomAmount + zoomCenter;
-  
-  // Mapea las coordenadas de textura al tamaño del lienzo
-  vec2 scaledUV = vec2(zoomUV.x * resolution.x, zoomUV.y * resolution.y);
-  
-  // Obtiene el color de la textura
-  vec4 color = texture2D(texture, scaledUV);
-  
-  gl_FragColor = color;
-}
-`;
-
-// Vertex shader
-const vertShader = `
-precision mediump float;
-
-attribute vec3 aPosition;
-attribute vec2 aTexCoord;
-varying vec2 vTexCoord;
-
-uniform mat4 uModelViewMatrix;
-uniform mat4 uProjectionMatrix;
-
-void main() {
-  gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aPosition, 1.0);
-  vTexCoord = aTexCoord;
-}
-`;
-
-// Inicia la aplicación de p5.js
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+function preload() {
+  img = loadImage('tu_imagen.jpg'); // Reemplaza 'tu_imagen.jpg' con la ruta de tu imagen
+  shaderBlur = loadShader('blur.vert', 'blur.frag');
+  shaderGray = loadShader('gray.vert', 'gray.frag');
+  shaderInvert = loadShader('invert.vert', 'invert.frag');
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
-  noStroke();
+  createCanvas(800, 600, WEBGL);
+  noLoop();
+
+  shader(shaderBlur); // Aplica el shader de Blur por defecto
+  shaderBlur.setUniform('uResolution', [width, height]);
+  shaderBlur.setUniform('uBlurAmount', 5.0); // Ajusta la cantidad de desenfoque
+
+  image(img, -width / 2, -height / 2, width, height);
 }
 
 function draw() {
   background(0);
-  rotateX(frameCount * 0.01);
-  rotateY(frameCount * 0.01);
-  shader(shader);
-  box(200);
+
+  // Verifica qué shader se debe aplicar según la tecla presionada
+  if (keyIsDown(49)) { // Tecla '1' para Blur
+    shader(shaderBlur);
+    shaderBlur.setUniform('uResolution', [width, height]);
+    shaderBlur.setUniform('uBlurAmount', 5.0); // Ajusta la cantidad de desenfoque
+  } else if (keyIsDown(50)) { // Tecla '2' para Gray
+    shader(shaderGray);
+    shaderGray.setUniform('uResolution', [width, height]);
+  } else if (keyIsDown(51)) { // Tecla '3' para Invert
+    shader(shaderInvert);
+    shaderInvert.setUniform('uResolution', [width, height]);
+  }
+
+  rect(-width / 2, -height / 2, width, height); // Dibuja un rectángulo para aplicar el shader
 }
-}
+*/
