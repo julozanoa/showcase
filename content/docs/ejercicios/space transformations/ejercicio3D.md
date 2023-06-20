@@ -64,7 +64,7 @@ Variables y vectores: Utilizamos variables para almacenar el tamaño y la posici
 
 Necesitas darle click al recuadro en el que se encuentra el cubo en movimiento, ahora con las teclas arriba, abajo, izquierda y derecha se le da movimiento dependiendo de la teclas que se este oprimiendo
 
-{{< details title="photomosaic.js" open=false >}}
+{{< details title="ejercicio3D.js" open=false >}}
 
 ```javascript
 
@@ -148,12 +148,3 @@ function draw() {
 {{< /details >}}
 
 {{< p5-iframe sketch="/showcase/sketches/ejercicio3D.js" lib1="/showcase/sketches/libraries/libreria1.js" lib2="/showcase/sketches/libraries/libreria2.js"width="675" height="675" >}}
-
-# Referencias
-
-{{< hint warning >}}
-
-- [1] _“referencias basicas”_ **p5** https://p5js.org/es/.
-- [2] _“pagina colaborativa en ejercicios de p5”_ **Processing Foundation** https://discourse.processing.org/c/p5js/10.
-- [3] _“Ayuda de chat GPT”_ **Ayuda de estructuracion y formulacion del problema** Para la elaboracion de este ejercicio se utilizo la herramienta chatGPT, la cual fue de gran ayuda para formular un problema que involucrara figuras 3D, colisiones y spotlight, esta herramienta nos ayudo a generar una buena base del codigo implementado en el cual a travez de la experimentacion de los integrantes del grupo y la aplicacion de conceptos encontrados en las anterioires referencias expuestas se logro la adquisicion de los conocimiento sobre los temas anteriormente expuestos y una mejora considerable del codigo base proporcionado por la herramienta
-{{< /hint >}}

@@ -2,24 +2,13 @@
 weight: 1
 ---
 
-## Fotomosaico
+## Posteffects
 
-El fotomosaico es una imagen, retrato o fotografía que se divide por figuras geométricas, generalmente
-por cuadrados o rectángulos del mismo tamaño, esto con el fin de remplazar las mismas
-por otros retratos, fotografías o imágenes que concuerden con los colores promedio que encierran las
-figuras geométricas de la imagen original, logrando que al visualizar la
-imagen de un punto lejano se logre ver como la original , pero que al ver de un punto cercano o al
-hacer zoom se pueda percibir que se compone de otras imágenes.
+Los posteffects en imágenes con shaders son técnicas que se utilizan para aplicar efectos visuales o transformaciones a una imagen utilizando shaders. Un shader es un programa informático que se ejecuta en la unidad de procesamiento gráfico (GPU) y se utiliza para manipular los píxeles de una imagen o superficie en tiempo real.
 
-# Fotomosaico
+## Implementación de Posteffects
 
-## Fotomosaico por hardware
-
-La implementación del fotomosaico se puede realizar a través de hardware, es decir, la construcción de un algoritmo que se encargue de convertir la imagen original en un mosaico de otras.
-
-En la funcion `preload` definimos el fragmento a usar demoninado `photomosaic.frag`, a partir de ahi al mosaico final vamos a definir ciertos parametros que van a ser obtenidos al momento de recorrer la imagen, aqui se comparan los texeles del color promedio que posee cada pixel de la imagen o video original.
-
-Los colores promedio de la imagen original son comparados con la imagen devuelta por el quadrille, haciendo uso de una tolerancia que va aumentando hasta encontrar el color mas cercano al del original y de esta forma ese color encontrado es el que se usa para llenar en la imagen que se muestra como resultado.
+Para implementar posteffects en imágenes con shaders, se requiere un entorno de programación que admita el uso de shaders, como p5.js. A continuación, se muestra un ejemplo de cómo se puede aplicar un efecto de desenfoque, escala de grises e inversión de colores a una imagen utilizando shaders en p5.js:
 
 {{< details title="posteffects.js" open=false >}}
 
@@ -121,11 +110,3 @@ function draw() {
 {{< /details >}}
 
 {{< p5-iframe sketch="/showcase/sketches/posteffect.js" lib1="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" lib2="/showcase/sketches/libraries/p5.quadrille.js" lib3="/showcase/sketches/libraries/p5.js"width="675" height="675" >}}
-
-# Referencias
-
-{{< hint warning >}}
-
-- [1] _“Shaders”_ **github.com** https://github.com/mattdesl/lwjgl-basics/wiki/Shaders (Mar. 8, 2020).
-
-{{< /hint >}}

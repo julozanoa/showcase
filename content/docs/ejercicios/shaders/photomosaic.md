@@ -155,11 +155,3 @@ function sample() {
 {{< /details >}}
 
 {{< p5-iframe sketch="/showcase/sketches/photomosaic.js" lib1="/showcase/sketches/libraries/p5.shaderbox.js" lib2="/showcase/sketches/libraries/p5.quadrille.js"width="675" height="675" >}}
-
-# Referencias
-
-{{< hint warning >}}
-
-- [1] _“Shaders”_ **github.com** https://github.com/mattdesl/lwjgl-basics/wiki/Shaders (Mar. 8, 2020).
-
-{{< /hint >}}

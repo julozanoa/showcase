@@ -11,7 +11,7 @@ weight: 3
 ---
 
 {{< hint info >}}
-### **Spot light & Collitions**
+### **Spot Light & Collitions**
 {{< /hint >}}
 
 {{< hint danger >}}
