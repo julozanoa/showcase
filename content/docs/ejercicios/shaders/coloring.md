@@ -4,11 +4,11 @@ weight: 1
 
 ## Coloring
 
-Los posteffects en imágenes con shaders son técnicas que se utilizan para aplicar efectos visuales o transformaciones a una imagen utilizando shaders. Un shader es un programa informático que se ejecuta en la unidad de procesamiento gráfico (GPU) y se utiliza para manipular los píxeles de una imagen o superficie en tiempo real.
+El Color blending es el proceso de combinar dos o más colores para obtener un nuevo color resultante. Se utiliza en diversos contextos, como en pantallas de visualización y sistemas de impresión. En la mezcla aditiva, los colores se superponen y suman sus intensidades de luz, mientras que, en la mezcla sustractiva, se restan cantidades de pigmentos de colores primarios. Estos métodos permiten crear efectos visuales, transiciones suaves y representaciones realistas de colores en el diseño gráfico, la animación y otras aplicaciones visuales, es una técnica fundamental en el campo de la representación y manipulación de colores, su aplicación es amplia, abarcando desde la mezcla de colores primarios en pantallas hasta la combinación de tintas en sistemas de impresión. Gracias a esta capacidad de mezclar colores, es posible lograr efectos visuales impactantes y realistas en diversos campos creativos y tecnológicos.
 
-## Implementación de Posteffects
+## Implementación Coloring
 
-Para implementar posteffects en imágenes con shaders, se requiere un entorno de programación que admita el uso de shaders, como p5.js. A continuación, se muestra un ejemplo de cómo se puede aplicar un efecto de desenfoque, escala de grises e inversión de colores a una imagen utilizando shaders en p5.js:
+Este programa carga y utiliza shaders para mezclar los colores color1 y color2 en un lienzo, La cantidad de mezcla es controlada por la posición horizontal del ratón, lo que permite una transición suave entre los colores seleccionados.
 
 {{< details title="coloring.js" open=false >}}
 
@@ -94,4 +94,6 @@ function draw() {
 
 {{< /details >}}
 
-{{< p5-iframe sketch="/showcase/sketches/coloring.js" lib1="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" lib2="/showcase/sketches/libraries/p5.quadrille.js" lib3="/showcase/sketches/libraries/p5.js"width="675" height="675" >}}
+{{< p5-iframe sketch="/showcase/sketches/coloring.js" lib1="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" lib2="/showcase/sketches/libraries/p5.quadrille.js" lib3="/showcase/sketches/libraries/p5.js"width="425" height="425" >}}
+
+En primer lugar, se cargan los shaders desde archivos externos en la función preload(). Estos shaders son programas que definen cómo se realizará la mezcla de colores. Luego, en la función setup(), se crea un lienzo en modo WEBGL con dimensiones de 400x400 píxeles. Se definen los colores color1 y color2, que representan el rojo y el azul respectivamente. Además, se configuran los uniformes del shader, incluyendo la resolución del lienzo y la cantidad de mezcla. En la función draw(), se establecen los valores de los colores y la cantidad de mezcla en los uniformes del shader, luego, se dibuja un rectángulo en el lienzo que ocupa todo el espacio disponible. La cantidad de mezcla se actualiza en función de la posición horizontal del ratón, utilizando la función map(). Este valor actualizado se envía al shader para controlar la mezcla de colores.

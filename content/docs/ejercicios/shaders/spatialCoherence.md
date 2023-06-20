@@ -2,13 +2,13 @@
 weight: 1
 ---
 
-## spatial coherence
+## Spatial Coherence
 
-Los posteffects en imágenes con shaders son técnicas que se utilizan para aplicar efectos visuales o transformaciones a una imagen utilizando shaders. Un shader es un programa informático que se ejecuta en la unidad de procesamiento gráfico (GPU) y se utiliza para manipular los píxeles de una imagen o superficie en tiempo real.
+La coherencia espacial se refiere a la relación de fase entre puntos distintos de un haz de luz. Es utilizada para describir los efectos de la extensión espacial de fuentes de luz. Cuando dos puntos desplazados lateralmente se encuentran en el mismo frente de onda, los campos en esos puntos son coherentes espacialmente. En resumen, la coherencia espacial se refiere a la capacidad de un haz de luz para mantener una relación de fase constante entre diferentes puntos, lo cual es relevante en aplicaciones como la holografía y la interferometría para mediciones precisas de fase.
 
-## Implementación de Posteffects
+## Implementación de Spatial Coherence
 
-Para implementar posteffects en imágenes con shaders, se requiere un entorno de programación que admita el uso de shaders, como p5.js. A continuación, se muestra un ejemplo de cómo se puede aplicar un efecto de desenfoque, escala de grises e inversión de colores a una imagen utilizando shaders en p5.js:
+El código es un programa que muestra un lienzo en 3D y permite al usuario elegir entre una imagen, un video o la cámara como fuente de entrada. Se utilizan elementos de interfaz de usuario como menús desplegables, controles deslizantes y casillas de verificación para ajustar los efectos visuales aplicados mediante un shader. El programa actualiza los medios de reproducción y realiza acciones correspondientes en función de la selección del usuario. En cada iteración del bucle de dibujo, se aplica el shader y se dibuja un rectángulo en el lienzo. Además, se realiza el ajuste del tamaño del lienzo cuando cambia el tamaño de la ventana.
 
 {{< details title="coherencia.js" open=false >}}
 
@@ -183,4 +183,6 @@ function windowResized() {
 
 {{< /details >}}
 
-{{< p5-iframe sketch="/showcase/sketches/coherencia.js" lib1="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" lib2="/showcase/sketches/libraries/p5.quadrille.js" lib3="/showcase/sketches/libraries/p5.js"width="675" height="675" >}}
+{{< p5-iframe sketch="/showcase/sketches/coherencia.js" lib1="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" lib2="/showcase/sketches/libraries/p5.quadrille.js" lib3="/showcase/sketches/libraries/p5.js"width="825" height="625" >}}
+
+La coherencia espacial en un código implica considerar la relación visual entre elementos en una imagen o escena. Se utilizan técnicas como filtros espaciales, segmentación, detección de bordes y filtros de textura. Estas técnicas permiten resaltar características, agrupar regiones similares, identificar cambios bruscos y preservar la coherencia de la textura. El objetivo es mantener una relación visual coherente entre elementos cercanos y lograr una representación más natural y realista. En resumen, la coherencia espacial en el código se logra mediante técnicas que tienen en cuenta la relación espacial entre elementos visuales para mejorar la calidad y apariencia de la imagen o escena.

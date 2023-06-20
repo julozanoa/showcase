@@ -110,3 +110,5 @@ function draw() {
 {{< /details >}}
 
 {{< p5-iframe sketch="/showcase/sketches/posteffect.js" lib1="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" lib2="/showcase/sketches/libraries/p5.quadrille.js" lib3="/showcase/sketches/libraries/p5.js"width="675" height="675" >}}
+
+En este ejemplo, se carga una imagen específica utilizando loadImage(). Luego se cargan los shaders necesarios utilizando loadShader(). Se establece el shader de desenfoque como el shader predeterminado utilizando shader(shaderBlur), y se ajustan los parámetros del shader con shaderBlur.setUniform(). Se muestra la imagen original en el lienzo utilizando image(). Luego, se crean casillas de verificación para habilitar o deshabilitar los diferentes efectos. Cuando se cambia el estado de una casilla de verificación, se activa el shader correspondiente y se ajustan sus parámetros si es necesario.
