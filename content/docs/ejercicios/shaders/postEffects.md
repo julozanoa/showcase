@@ -96,18 +96,23 @@ function setup() {
 function draw() {
   background(0);
 
-  // Verifica qué shader se debe aplicar según la tecla presionada
-  if (keyIsDown(49)) { // Tecla '1' para Blur
-    shader(shaderBlur);
-    shaderBlur.setUniform('uResolution', [width, height]);
-    shaderBlur.setUniform('uBlurAmount', 5.0); // Ajusta la cantidad de desenfoque
-  } else if (keyIsDown(50)) { // Tecla '2' para Gray
-    shader(shaderGray);
-    shaderGray.setUniform('uResolution', [width, height]);
-  } else if (keyIsDown(51)) { // Tecla '3' para Invert
-    shader(shaderInvert);
-    shaderInvert.setUniform('uResolution', [width, height]);
-  }
+  // Crea las casillas de verificación
+  checkboxBlur = createCheckbox('Blur', false);
+  checkboxBlur.position(10, 10);
+  checkboxBlur.changed(shader(shaderBlur));
+  shaderBlur.setUniform('uResolution', [width, height]);
+  shaderBlur.setUniform('uBlurAmount', 5.0); // Ajusta la cantidad de desenfoque
+
+  checkboxGray = createCheckbox('Gray', false);
+  checkboxGray.position(10, 30);
+  checkboxGray.changed(shader(shaderGray));
+  shaderGray.setUniform('uResolution', [width, height]);
+
+  checkboxInvert = createCheckbox('Invert', false);
+  checkboxInvert.position(10, 50);
+  checkboxInvert.changed(shader(shaderInvert));\
+  shaderInvert.setUniform('uResolution', [width, height]);
+
 
   rect(-width / 2, -height / 2, width, height); // Dibuja un rectángulo para aplicar el shader
 }
