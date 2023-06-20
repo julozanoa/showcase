@@ -21,7 +21,7 @@ En la funcion `preload` definimos el fragmento a usar demoninado `photomosaic.fr
 
 Los colores promedio de la imagen original son comparados con la imagen devuelta por el quadrille, haciendo uso de una tolerancia que va aumentando hasta encontrar el color mas cercano al del original y de esta forma ese color encontrado es el que se usa para llenar en la imagen que se muestra como resultado.
 
-{{< details title="photomosaic.js" open=false >}}
+{{< details title="posteffects.js" open=false >}}
 
 ```javascript
 
@@ -29,132 +29,87 @@ Los colores promedio de la imagen original son comparados con la imagen devuelta
 
 {{< /details >}}
 
-{{< details title="photomosaic.frag" open=false >}}
+{{< details title="gray.frag" open=false >}}
 
 ```javascript
 precision mediump float;
 
-const int num_images = 40;
 
-// source (image or video) is sent by the sketch
-uniform sampler2D source;
-
-// palette is sent by the sketch
-uniform sampler2D palette;
-// number of cols are sent by sketch
-uniform float cols;
-
-uniform float lumas[num_images];
-uniform float red_palette[num_images];
-uniform float green_palette[num_images];
-uniform float blue_palette[num_images];
-
-// toggles debug
-uniform bool debug;
-
-// toggles coloring
-uniform bool color_on;
-uniform vec4 background;
-uniform vec4 foreground;
-
-// target horizontal & vertical resolution
-uniform float resolution;
-
-// interpolated color (same name and type as in vertex shader)
-varying vec4 vVertexColor;
-// interpolated texcoord (same name and type as in vertex shader)
-varying vec2 vTexCoord;
-
-float luma(vec3 color) {
-  return (0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
-}
+uniform sampler2D uTexture;
 
 void main() {
-  vec2 fontCoord = vTexCoord * resolution;
-  vec2 srcCoord = floor(fontCoord);
-  fontCoord = fontCoord - srcCoord;
-  srcCoord = srcCoord / vec2(resolution);
-  float mid = 1.0/(2.0*resolution);
-  srcCoord = srcCoord + vec2(mid);
-
-  vec4 key = texture2D(source, srcCoord);
-  if (debug) {
-    gl_FragColor = key;
-  } else {
-    float lumakey = luma(key.rgb);
-    float selected = 0.0;
-
-    bool complete = false;
-    for(float j = 0.02; j <= 0.5; j += 0.02){
-      for(int i = 0 ; i < num_images; i ++)
-      {
-        if((red_palette[i]/255.0> (key.r - j) && red_palette[i]/255.0 < (key.r + j)) && (green_palette[i]/255.0> (key.g - j) && green_palette[i]/255.0 < (key.g + j)) && (blue_palette[i]/255.0> (key.b - j) && blue_palette[i]/255.0 < (key.b + j))){
-          selected = float(i);
-          complete = true;
-          break;
-        }
-      }
-      if(complete){
-        break;
-      }
-    }
-
-    vec2 tile = vec2((floor(selected) + fontCoord.x) / cols, fontCoord.y);
-
-    vec4 paletteTexel = texture2D(palette, tile);
-    gl_FragColor = paletteTexel;
-  }
+  vec4 color = texture2D(uTexture, gl_FragCoord.xy / uResolution.xy);
+  float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+  gl_FragColor = vec4(vec3(gray), color.a);
 }
 
 ```
 
 {{< /details >}}
 
-{{< details title="photomosaic.js" open=false >}}
+{{< details title="gray.vert" open=false >}}
 
 ```javascript
-function preload() {
-  image_src = loadImage('/visual_computing/imgs/car.jpg');
-  video_src = createVideo(['/visual_computing/vid/drift.mp4']);
-  video_src.hide(); // by default video shows up in separate dom
-  mosaic = readShader('/visual_computing/sketches/shaders/photomosaic.frag');
-  p = [];
-  for (let i = 1; i <= 40; i++) {
-    if (i.toString().length == 1) {
-      p.push(loadImage(`/visual_computing/imgs/cars/00000${i}.jpg`));
-    } else {
-      p.push(loadImage(`/visual_computing/imgs/cars/0000${i}.jpg`));
-    }
-  }
+precision mediump float;
+
+
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+
+varying vec2 vTexCoord;
+
+void main() {
+  vTexCoord = aTexCoord;
+  gl_Position = vec4(aPosition, 1.0);
 }
 
-function sample() {
-  if (pg.width !== SAMPLE_RES * imageCells.width) {
-    pg = createGraphics(SAMPLE_RES * imageCells.width, SAMPLE_RES);
-    mosaic.setUniform("cols", imageCells.width);
-  }
-  imageCells.sort({
-    ascending: true,
-    cellLength: SAMPLE_RES,
-    mode: "LUMA",
-  });
+}
 
-  luma = imageCells.saveLuma({
-    cellLength: SAMPLE_RES,
-  });
-  rgb = imageCells.saveRGB({
-    cellLength: SAMPLE_RES,
-  });
-  drawQuadrille(imageCells, {
-    graphics: pg,
-    cellLength: SAMPLE_RES,
-    outlineWeight: 0,
-  });
-  mosaic.setUniform("palette", pg);
-  mosaic.setUniform("lumas", luma);
-  mosaic.setUniform("red_palette", rgb.r);
-  mosaic.setUniform("green_palette", rgb.g);
-  mosaic.setUniform("blue_palette", rgb.b);
+```
+
+{{< /details >}}
+
+{{< details title="posteffects.js" open=false >}}
+
+```javascript
+let img;
+let shaderBlur, shaderGray, shaderInvert;
+
+function preload() {
+  img = loadImage('/showcase/imgs/paisaje.jpg'); // Reemplaza 'tu_imagen.jpg' con la ruta de tu imagen
+  shaderBlur = loadShader('/showcase/sketches/shaders/blur.vert', '/showcase/sketches/shaders/blur.frag');
+  shaderGray = loadShader('/showcase/sketches/shaders/gray.vert', '/showcase/sketches/shaders/gray.frag');
+  shaderInvert = loadShader('/showcase/sketches/shaders/invert.vert', '/showcase/sketches/shaders/invert.frag');
+}
+
+function setup() {
+  createCanvas(800, 600, WEBGL);
+  noLoop();
+
+  shader(shaderBlur); // Aplica el shader de Blur por defecto
+  shaderBlur.setUniform('uResolution', [width, height]);
+  shaderBlur.setUniform('uBlurAmount', 5.0); // Ajusta la cantidad de desenfoque
+
+  image(img, -width / 2, -height / 2, width, height);
+}
+
+function draw() {
+  background(0);
+
+  // Verifica qué shader se debe aplicar según la tecla presionada
+  if (keyIsDown(49)) { // Tecla '1' para Blur
+    shader(shaderBlur);
+    shaderBlur.setUniform('uResolution', [width, height]);
+    shaderBlur.setUniform('uBlurAmount', 5.0); // Ajusta la cantidad de desenfoque
+  } else if (keyIsDown(50)) { // Tecla '2' para Gray
+    shader(shaderGray);
+    shaderGray.setUniform('uResolution', [width, height]);
+  } else if (keyIsDown(51)) { // Tecla '3' para Invert
+    shader(shaderInvert);
+    shaderInvert.setUniform('uResolution', [width, height]);
+  }
+
+  rect(-width / 2, -height / 2, width, height); // Dibuja un rectángulo para aplicar el shader
 }
 ```
 

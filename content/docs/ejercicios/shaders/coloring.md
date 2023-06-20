@@ -4,23 +4,17 @@ weight: 1
 
 ## Fotomosaico
 
-El fotomosaico es una imagen, retrato o fotografía que se divide por figuras geométricas, generalmente
-por cuadrados o rectángulos del mismo tamaño, esto con el fin de remplazar las mismas
-por otros retratos, fotografías o imágenes que concuerden con los colores promedio que encierran las
-figuras geométricas de la imagen original, logrando que al visualizar la
-imagen de un punto lejano se logre ver como la original , pero que al ver de un punto cercano o al
-hacer zoom se pueda percibir que se compone de otras imágenes.
+La imagen tipo fotomosaico es una imagen, retrato o fotografía que se divide por figuras geométricas, generalmente por cuadrados o rectángulos del mismo tamaño, lo cual posibilita la reemplazo de las mismas por otros retratos, fotografías o imágenes que concuerden con los colores promedio que encierran las figuras geométricas de la imagen original, lo cual posibilita la reemplazo por otros retratos, fotografías o imágenes que concuerden con los colores promedio que encierran las figuras geométricas de la imagen original, lo cual posibilita la ruptura de las mismas por otros retratos, fotografías o imágenes que concuerden con los colores promedio que encierran las figuras geométricas de la imagen original, pero que al observar de un punto cercano o al hacer zoom.
 
 # Fotomosaico
 
-## Fotomosaico por hardware
+## La imagen tipo fotomosaico se implemento a través de hardware
 
-La implementación del fotomosaico se puede realizar a través de hardware, es decir, la construcción de un algoritmo que se encargue de convertir la imagen original en un mosaico de otras.
+La adopción del fotomosaico se puede llevar a cabo mediante hardware, es decir, la elaboración de un algoritmo que se encargue de transformar la imagen original en un mosaico de otras imágenes..
 
-En la funcion `preload` definimos el fragmento a usar demoninado `photomosaic.frag`, a partir de ahi al mosaico final vamos a definir ciertos parametros que van a ser obtenidos al momento de recorrer la imagen, aqui se comparan los texeles del color promedio que posee cada pixel de la imagen o video original.
+En la función preload, establecemos el fragmento llamado photomosaic.frag como el fragmento a utilizar. A partir de ahí, en el mosaico final, definiremos ciertos parámetros que se obtendrán al recorrer la imagen. En este proceso, se comparan los valores de color promedio de cada píxel de la imagen o video original.
 
-Los colores promedio de la imagen original son comparados con la imagen devuelta por el quadrille, haciendo uso de una tolerancia que va aumentando hasta encontrar el color mas cercano al del original y de esta forma ese color encontrado es el que se usa para llenar en la imagen que se muestra como resultado.
-
+Los colores promedio de la imagen original se comparan con la imagen generada por el cuadrícula, utilizando una tolerancia que aumenta gradualmente. De esta manera, se busca el color más cercano al original, y ese color encontrado se utiliza para rellenar la imagen resultante que se muestra.
 {{< details title="photomosaic.js" open=false >}}
 
 ```javascript
